@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "stdio.h": "c",
+        "stdlib.h": "c",
+        "main.h": "c",
+        "slbasics.h": "c",
+        "slstring.h": "c"
+    }
+}
