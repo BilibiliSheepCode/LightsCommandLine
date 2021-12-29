@@ -1,2 +1,1 @@
-#include"SLBasics.h"
-#include"SLString.h"
+#include"SLECH/SLString.h""

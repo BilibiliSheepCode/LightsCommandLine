@@ -52,6 +52,25 @@ String *String_Output(String *string){
     }
     return string;
 }
+String *String_FInput(FILE *stream,String *string){
+    Char temp=fgetc(stream);
+    while(temp!=EOF){
+        string->chr = temp;
+        string->next = new(String);
+        string->next->ahead = string;
+        string = string->next;
+        temp = fgetc(stream);
+    }
+    return string;
+}
+String *String_FOutput(FILE *stream,String *string){
+    string = String_Get_Head(string);
+    while(string->next!=NULL){
+        fputc(string->chr,stream);
+        string = string->next;
+    }
+    return string;
+}
 String *String_Set(String *string,Char *chars){
     int range = 0;
     Char temp=chars[range];
@@ -86,6 +105,17 @@ Int String_IndexOf(String *string,Char index){
     }
     return Index;
 }
+Int String_IndexEOf(String *string,Char index){
+    Int Index = 0;
+    while(string->chr!=index){
+        if(string->next==NULL){
+            return NULL;
+        }
+        string = string->next;
+        Index++;
+    }
+    return Index;
+}
 Char String_GetByIndex(String *string,Int index){
     string = String_Get_Head(string);
     for(index;index;--index){
@@ -95,6 +125,34 @@ Char String_GetByIndex(String *string,Int index){
         string = string->next;
     }
     return string->chr;
+}
+Char String_GetByEIndex(String *string,Int index){
+    for(index;index;--index){
+        if(string->next==NULL){
+            return NULL;
+        }
+        string = string->next;
+    }
+    return string->chr;
+}
+String *String_GetOByIndex(String *string,Int index){
+    string = String_Get_Head(string);
+    for(index;index;--index){
+        if(string->next==NULL){
+            return NULL;
+        }
+        string = string->next;
+    }
+    return string;
+}
+String *String_GetOByEIndex(String *string,Int index){
+    for(index;index;--index){
+        if(string->next==NULL){
+            return NULL;
+        }
+        string = string->next;
+    }
+    return string;
 }
 Int String_Lenth(String *string){
     string = String_Get_Head(string);
