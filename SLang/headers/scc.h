@@ -8,13 +8,15 @@
 #include"../../SLECH/SLInt.h"
 typedef enum _Status {SLERROR = -1,SLSUCCESS = 0,SLOVERFLOW = 1} Status;
 //Fuctions
-Status Replace(String *Code){
+Status GetDefine(String *Code){
+    String *temp;
     Status status = SLSUCCESS;
-    Int index,range1=0,range2=0;
-    Char *chars[64],*replacement[128];
+    Int index,range1=0,range2=0,tempindex,rn;
+    Char chars[64],replacement[128];
+//Get define args and replace it
     while(Code->next!=NULL){
         index = String_IndexEOf(Code,'$');
-        if(index==NULL){
+        if(index==-1){
             return status;
         }
         if(String_GetByEIndex(Code,index+1)=='d'&&String_GetByEIndex(Code,index+2)=='e'&&String_GetByEIndex(Code,index+3)=='f'&&String_GetByEIndex(Code,index+4)=='i'&&String_GetByEIndex(Code,index+5)=='n'&&String_GetByEIndex(Code,index+6)=='e'){
@@ -42,7 +44,10 @@ Status Replace(String *Code){
         }else{
             Code = Code->next->next;
         }
+        range1 = 0;
+        range2 = 0;
     }
+
     return status;
 }
 #endif
