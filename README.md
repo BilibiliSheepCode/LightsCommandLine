@@ -1,2 +1,2 @@
 # LightsCommandLine
-A command line with Slang Complier(ssc)
+A command line for SheepOS.
